@@ -1,0 +1,260 @@
+{
+	"info": {
+		"_postman_id": "4879904d-d068-4e62-9631-6a1e91a46ff6",
+		"name": "REST GORM API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GEt Task",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8787/task/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8787",
+					"path": [
+						"task",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUser",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8787/users/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8787",
+					"path": [
+						"users",
+						"7"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "User Tasks null",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8787/users/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8787",
+							"path": [
+								"users",
+								"7"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 27 Dec 2022 04:54:57 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "188"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"ID\": 7,\n    \"CreatedAt\": \"2022-12-26T22:22:54.451531-06:00\",\n    \"UpdatedAt\": \"2022-12-26T22:22:54.451531-06:00\",\n    \"DeletedAt\": null,\n    \"first_name\": \"Carlos\",\n    \"lastname\": \"CC\",\n    \"email\": \"email3\",\n    \"tasks\": null\n}"
+				}
+			]
+		},
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"first_name\": \"Carlos\",\r\n    \"lastname\": \"CC\",\r\n    \"email\":\"email3\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8787/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8787",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Task",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Titulo related\",\r\n    \"descripton\": \"Recor link to user\",\r\n    \"user_id\": 7\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8787/task",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8787",
+					"path": [
+						"task"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete user",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8787/users/6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8787",
+					"path": [
+						"users",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Task",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8787/task/6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8787",
+					"path": [
+						"task",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8787/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8787",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Tasks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8787/task",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8787",
+					"path": [
+						"task"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get All Tasks OK",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8787/task",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8787",
+							"path": [
+								"task"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 27 Dec 2022 04:51:15 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "753"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"ID\": 1,\n        \"CreatedAt\": \"2022-12-26T22:42:28.019125-06:00\",\n        \"UpdatedAt\": \"2022-12-26T22:42:28.019125-06:00\",\n        \"DeletedAt\": null,\n        \"Title\": \"Titulo\",\n        \"Descripton\": \"Dexc\",\n        \"Done\": false,\n        \"user_id\": 0\n    },\n    {\n        \"ID\": 2,\n        \"CreatedAt\": \"2022-12-26T22:42:42.019884-06:00\",\n        \"UpdatedAt\": \"2022-12-26T22:42:42.019884-06:00\",\n        \"DeletedAt\": null,\n        \"Title\": \"Titulo\",\n        \"Descripton\": \"Dexc\",\n        \"Done\": false,\n        \"user_id\": 0\n    },\n    {\n        \"ID\": 3,\n        \"CreatedAt\": \"2022-12-26T22:42:46.903294-06:00\",\n        \"UpdatedAt\": \"2022-12-26T22:42:46.903294-06:00\",\n        \"DeletedAt\": null,\n        \"Title\": \"Titulo3\",\n        \"Descripton\": \"Dexc\",\n        \"Done\": false,\n        \"user_id\": 0\n    },\n    {\n        \"ID\": 4,\n        \"CreatedAt\": \"2022-12-26T22:50:02.430688-06:00\",\n        \"UpdatedAt\": \"2022-12-26T22:50:02.430688-06:00\",\n        \"DeletedAt\": null,\n        \"Title\": \"Titulo related\",\n        \"Descripton\": \"Recor link to user\",\n        \"Done\": false,\n        \"user_id\": 7\n    }\n]"
+				}
+			]
+		}
+	]
+}
