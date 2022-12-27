@@ -2,38 +2,58 @@ package routes
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 
 	"github.com/carloscontrerasruiz/rest-api/db"
 	"github.com/carloscontrerasruiz/rest-api/models"
+	"github.com/carloscontrerasruiz/rest-api/service"
+	"github.com/gorilla/mux"
 )
 
 func GetUsersHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("GetUsersHandler"))
+	var users []models.User
+	db.DB.Find(&users)
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(&users)
 }
 
 func GetUserHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("GetUserHandler"))
-}
-
-func PostUserHandler(w http.ResponseWriter, r *http.Request) {
-	var user models.User
 	w.Header().Set("Content-Type", "application/json")
 
-	json.NewDecoder(r.Body).Decode(&user)
+	var user models.User
 
-	//validations
-	if len(user.Firstname) <= 0 || len(user.Lastname) <= 0 {
-		w.WriteHeader(http.StatusBadRequest)
+	params := mux.Vars(r)
+	fmt.Println(params["id"])
+
+	db.DB.First(&user, params["id"])
+
+	if user.ID == 0 {
+		w.WriteHeader(http.StatusNotFound)
+		fmt.Println("User not found")
 		return
 	}
 
-	createdUser := db.DB.Create(&user)
+	db.DB.Model(&user).Association("Tasks").Find(&user.Tasks)
 
-	if createdUser.Error != nil {
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(&user)
+}
+
+func PostUserHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	var user models.User
+	json.NewDecoder(r.Body).Decode(&user)
+
+	err := service.CreateUser(&user)
+
+	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
-		log.Println(createdUser.Error.Error())
+		log.Println(err.Error())
 		return
 	}
 
@@ -42,5 +62,26 @@ func PostUserHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func DeleteUserHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("DeleteUserHandler"))
+	w.Header().Set("Content-Type", "application/json")
+
+	var user models.User
+
+	params := mux.Vars(r)
+	fmt.Println(params["id"])
+
+	db.DB.First(&user, params["id"])
+
+	if user.ID == 0 {
+		w.WriteHeader(http.StatusNotFound)
+		fmt.Println("User not found")
+		return
+	}
+
+	//Physycal delete
+	db.DB.Unscoped().Delete(&user)
+
+	//Logical Delete
+	//db.DB.Delete(&user)
+
+	w.WriteHeader(http.StatusOK)
 }
